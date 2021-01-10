@@ -13,30 +13,18 @@ import java.util.ArrayList;
 
 public class DrinkCategoryActivity extends AppCompatActivity {
 
-    ListView listViewCategory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_category);
 
-        listViewCategory = findViewById(R.id.lisViewCategory);
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Latte");
-        arrayList.add("Cappuccino");
-        arrayList.add("Filter");
+        ArrayAdapter<Drink> listAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_list_item_1,Drink.drinks);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this
-                , android.R.layout.simple_list_item_1,arrayList);
-        listViewCategory.setAdapter(arrayAdapter);
-
-        listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(DrinkCategoryActivity.this,DrinkActivity.class);
-                startActivity(intent);
-            }
-        });
+        ListView listDrinks = findViewById(R.id.list_drinks);
+        listDrinks.setAdapter(listAdapter);
 
     }
 }

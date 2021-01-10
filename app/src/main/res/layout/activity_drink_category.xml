@@ -8,15 +8,9 @@
     android:orientation="vertical"
     tools:context=".DrinkCategoryActivity">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/list_drinks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ListView
-            android:id="@+id/lisViewCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

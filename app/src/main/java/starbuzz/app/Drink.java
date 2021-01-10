@@ -41,4 +41,11 @@ public class Drink {
     public void setImageResourceId(int imageResourceId) {
         this.imageResourceId = imageResourceId;
     }
+
+    @Override
+    public String toString() {
+        return "Drink{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
