@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".WorkoutDetailFragment">
 
-    <Button
+    <TextView
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onShowDetails"
-        android:text="Show Details">
-    </Button>
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
