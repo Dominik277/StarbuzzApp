@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "starbuzz";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public StarbuzzDatabaseHelper(@Nullable Context context) {
         super(context,DB_NAME,null,DB_VERSION);
@@ -47,7 +47,7 @@ public class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
             insertDrink(db,"Filter","Our best drip coffee",R.drawable.latte);
         }
         if (oldVersion < 2){
-
+            db.execSQL("ALTER TABLE DRINK ADD COLUMN FAVORITE NUMERIC;");
         }
 
     }
