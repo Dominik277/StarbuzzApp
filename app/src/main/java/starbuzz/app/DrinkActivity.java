@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -81,6 +82,24 @@ public class DrinkActivity extends AppCompatActivity {
         }catch (SQLException e){
             Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
             toast.show();
+        }
+    }
+
+    private class UpdateDrinkTask extends AsyncTask<Integer,Void,Boolean>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... integers) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
         }
     }
 
