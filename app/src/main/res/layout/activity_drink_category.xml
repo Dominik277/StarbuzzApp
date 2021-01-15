@@ -5,18 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TopLevelActivity"
-    >
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:src="@drawable/starbucks"/>
+    tools:context=".TopLevelActivity">
 
     <ListView
-        android:id="@+id/list_options"
+        android:id="@+id/list_drinks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/options"
-        />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

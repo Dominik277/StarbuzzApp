@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -25,7 +24,7 @@ public class DrinkCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_category);
 
-        ListView listDrinks = (ListView) findViewById(R.id.list_options);
+        ListView listDrinks = (ListView) findViewById(R.id.list_drinks);
 
         SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
         try {
@@ -40,6 +39,7 @@ public class DrinkCategoryActivity extends AppCompatActivity {
                     new String[]{"NAME"},
                     new int[]{android.R.id.text1},
                     0);
+            listDrinks.setAdapter(listAdapter);
         }catch (SQLException e){
             Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
             toast.show();

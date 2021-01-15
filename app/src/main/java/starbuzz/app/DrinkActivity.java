@@ -47,8 +47,6 @@ public class DrinkActivity extends AppCompatActivity {
                 photo.setImageResource(photoId);
                 photo.setContentDescription(nameText);
             }
-            cursor.close();
-            db.close();
         }catch (SQLException e){
             Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
             toast.show();
