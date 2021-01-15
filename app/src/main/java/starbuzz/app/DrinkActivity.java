@@ -2,11 +2,14 @@ package starbuzz.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ public class DrinkActivity extends AppCompatActivity {
                 String nameText  = cursor.getString(0);
                 String descriptionText  = cursor.getString(1);
                 int photoId = cursor.getInt(2);
+                boolean isFavorite = (cursor.getInt(3) == 1);
 
                 TextView name = (TextView)findViewById(R.id.name);
                 name.setText(nameText);
@@ -46,12 +50,38 @@ public class DrinkActivity extends AppCompatActivity {
                 ImageView photo = (ImageView)findViewById(R.id.photo);
                 photo.setImageResource(photoId);
                 photo.setContentDescription(nameText);
+
+                CheckBox favorite = findViewById(R.id.favorite);
+                favorite.setChecked(isFavorite);
+
+                cursor.close();
+                db.close();
             }
         }catch (SQLException e){
             Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
             toast.show();
         }
-
-
     }
+
+    public void onFavoriteClick(View view){
+        int drinkId = (Integer)getIntent().getExtras().get(EXTRA_DRINKID);
+
+        CheckBox favorite = findViewById(R.id.favorite);
+        ContentValues drinkValues = new ContentValues();
+        drinkValues.put("FAVORITE", favorite.isChecked());
+
+        SQLiteOpenHelper starbuzzDatabasaeHelper = new StarbuzzDatabaseHelper(this);
+        try {
+            SQLiteDatabase db = starbuzzDatabasaeHelper.getWritableDatabase();
+            db.update("DRINK",
+                    drinkValues,
+                    "_id = ?",
+                    new String[]{Integer.toString(drinkId)});
+            db.close();
+        }catch (SQLException e){
+            Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
 }
