@@ -66,40 +66,42 @@ public class DrinkActivity extends AppCompatActivity {
 
     public void onFavoriteClick(View view){
         int drinkId = (Integer)getIntent().getExtras().get(EXTRA_DRINKID);
-
-        CheckBox favorite = findViewById(R.id.favorite);
-        ContentValues drinkValues = new ContentValues();
-        drinkValues.put("FAVORITE", favorite.isChecked());
-
-        SQLiteOpenHelper starbuzzDatabasaeHelper = new StarbuzzDatabaseHelper(this);
-        try {
-            SQLiteDatabase db = starbuzzDatabasaeHelper.getWritableDatabase();
-            db.update("DRINK",
-                    drinkValues,
-                    "_id = ?",
-                    new String[]{Integer.toString(drinkId)});
-            db.close();
-        }catch (SQLException e){
-            Toast toast = Toast.makeText(this,"Database unavailable",Toast.LENGTH_LONG);
-            toast.show();
-        }
+        new UpdateDrinkTask().execute(drinkId);
     }
 
     private class UpdateDrinkTask extends AsyncTask<Integer,Void,Boolean>{
+        private ContentValues drinkValues;
 
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
+            CheckBox favorite = findViewById(R.id.favorite);
+            drinkValues = new ContentValues();
+            drinkValues.put("FAVORITE",favorite.isChecked());
         }
 
         @Override
-        protected Boolean doInBackground(Integer... integers) {
-            return null;
+        protected Boolean doInBackground(Integer... drinks) {
+            int drinkId = drinks[0];
+            SQLiteOpenHelper starbuzzDatabaseHelper =
+                    new StarbuzzDatabaseHelper(DrinkActivity.this);
+            try {
+                SQLiteDatabase db = starbuzzDatabaseHelper.getWritableDatabase();
+                db.update("DRINK",drinkValues,
+                        "_id = ?",new String[]{Integer.toString(drinkId)});
+                db.close();
+                return true;
+            }catch (SQLException e){
+                return false;
+            }
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+        protected void onPostExecute(Boolean success) {
+            if (!success){
+                Toast toast = Toast.makeText(DrinkActivity.this,
+                        "Database unavailable",Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
