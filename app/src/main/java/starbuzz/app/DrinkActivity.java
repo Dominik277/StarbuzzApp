@@ -72,6 +72,10 @@ public class DrinkActivity extends AppCompatActivity {
     private class UpdateDrinkTask extends AsyncTask<Integer,Void,Boolean>{
         private ContentValues drinkValues;
 
+
+
+
+
         @Override
         protected void onPreExecute() {
             CheckBox favorite = findViewById(R.id.favorite);
